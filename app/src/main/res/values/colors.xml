@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="minBlack">#823a00</color>
+    <color name="maxBlack">#3d1b00</color>
+    <color name="minWhite">#fffbf8</color>
+    <color name="maxWhite">#ffc18f</color>
+    <color name="minAsian">#fff1b7</color>
+    <color name="maxAsian">#ffea5f</color>
+</resources>
