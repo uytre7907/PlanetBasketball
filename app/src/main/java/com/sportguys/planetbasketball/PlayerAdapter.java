@@ -18,6 +18,7 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
         TextView nameText;
         TextView positionText;
         TextView overallText;
+        TextView heighText;
         ImageView faceView;
     }
     public PlayerAdapter(Context context, ArrayList<Player> players){
@@ -36,6 +37,7 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
             v.positionText = (TextView)(convertView.findViewById(R.id.position_text));
             v.overallText = (TextView)(convertView.findViewById(R.id.overall_text));
             v.faceView = (ImageView)(convertView.findViewById(R.id.list_face));
+            v.heighText = (TextView)(convertView.findViewById(R.id.height_text));
             convertView.setTag(v);
         }else{
             v=(ViewHolder)convertView.getTag();
@@ -45,6 +47,7 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
         v.positionText.setText(p.getPositionString());
         v.overallText.setText(p.getOverallString());
         v.faceView.setImageDrawable(p.getFace());
+        v.heighText.setText(p.getHeightString());
         return convertView;
     }
 }

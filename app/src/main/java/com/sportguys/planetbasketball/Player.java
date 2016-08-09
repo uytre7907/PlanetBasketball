@@ -32,6 +32,8 @@ public class Player implements Comparable<Player>
     private double age;
     private String name;
     private LayerDrawable face;
+    private double height;
+    //IN INCHES
     private static ArrayList<String> firstNames=App.getFirstNames();
     private static ArrayList<String> lastNames=App.getLastNames();
     private static LinkedHashMap<String, Double> pointBoosts = new LinkedHashMap<>();
@@ -125,30 +127,35 @@ public class Player implements Comparable<Player>
         switch (temp){
             case (0): {
                 position = Position.PointGuard;
+                height=PlayerAttribute.randNorm(74,1.5);
                 positionInt=1;
                 boosts=pointBoosts;
                 break;
             }
             case (1):{
                 position=Position.ShootingGuard;
+                height=PlayerAttribute.randNorm(77,1.5);
                 positionInt=2;
                 boosts=shootingBoosts;
                 break;
             }
             case (2):{
                 position=Position.SmallForward;
+                height=PlayerAttribute.randNorm(79.5,1.5);
                 positionInt=3;
                 boosts=smallBoosts;
                 break;
             }
             case (3):{
                 position=Position.PowerForward;
+                height=PlayerAttribute.randNorm(82,1);
                 positionInt=4;
                 boosts=powerBoosts;
                 break;
             }
             case (4):{
                 position=Position.Center;
+                height=PlayerAttribute.randNorm(83.5,.75);
                 positionInt=5;
                 boosts=centerBoosts;
                 break;
@@ -165,7 +172,7 @@ public class Player implements Comparable<Player>
 
     @Override
     public String toString() {
-        return getPositionString()+ "\nAge: " + (int)age + "\nOverall: " +getOverall() + "\n" + attributeList.toString();
+        return getPositionString()+ "\nAge: " + (int)age + "\nHeight: " + getHeightString()+"\nOverall: " +getOverall() + "\n" + attributeList.toString();
     }
     public AttributeList getAttributes(){
         return attributeList;
@@ -175,7 +182,13 @@ public class Player implements Comparable<Player>
     }
     public int compareTo(Player p)
     {
-        return positionInt-p.getPositionInt();
+        int ret=positionInt-p.getPositionInt();
+        if(ret==0){
+            return p.getOverall()-getOverall();
+        }
+        else{
+            return ret;
+        }
     }
     public void save(ObjectOutputStream objectOutputStream)
     {
@@ -275,5 +288,9 @@ public class Player implements Comparable<Player>
     }
     public String getOverallString(){
         return getOverall()+" OVR";
+    }
+    public String getHeightString(){
+        int currHeight=(int)height;
+        return currHeight/12+"' " + currHeight%12 + '"';
     }
 }
