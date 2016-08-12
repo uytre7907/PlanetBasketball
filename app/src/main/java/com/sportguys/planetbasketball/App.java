@@ -24,20 +24,22 @@ public class App extends Application
         super.onCreate();
         DataHolder.setContext(getApplicationContext());
         DataHolder.setDatabaseHelper(new DBHelper());
-        int[] skinColors={ContextCompat.getColor(this, R.color.minBlack),ContextCompat.getColor(this, R.color.medBlack),ContextCompat.getColor(this, R.color.maxBlack),ContextCompat.getColor(this, R.color.minAsian),
-                ContextCompat.getColor(this, R.color.medAsian),ContextCompat.getColor(this, R.color.maxAsian), ContextCompat.getColor(this, R.color.minWhite),ContextCompat.getColor(this, R.color.medWhite), ContextCompat.getColor(this, R.color.maxWhite)};
+    }
+    public static void setupApp(){
+        int[] skinColors={ContextCompat.getColor(DataHolder.getContext(), R.color.minBlack),ContextCompat.getColor(DataHolder.getContext(), R.color.medBlack),ContextCompat.getColor(DataHolder.getContext(), R.color.maxBlack),ContextCompat.getColor(DataHolder.getContext(), R.color.minAsian),
+                ContextCompat.getColor(DataHolder.getContext(), R.color.medAsian),ContextCompat.getColor(DataHolder.getContext(), R.color.maxAsian), ContextCompat.getColor(DataHolder.getContext(), R.color.minWhite),ContextCompat.getColor(DataHolder.getContext(), R.color.medWhite), ContextCompat.getColor(DataHolder.getContext(), R.color.maxWhite)};
         Faces.setFaceColors(skinColors);
-        int[] eyeColors = {ContextCompat.getColor(this, R.color.blueEye), ContextCompat.getColor(this, R.color.brownEye), ContextCompat.getColor(this, R.color.greenEye),ContextCompat.getColor(this, R.color.hazelEye)};
+        int[] eyeColors = {ContextCompat.getColor(DataHolder.getContext(), R.color.blueEye), ContextCompat.getColor(DataHolder.getContext(), R.color.brownEye), ContextCompat.getColor(DataHolder.getContext(), R.color.greenEye),ContextCompat.getColor(DataHolder.getContext(), R.color.hazelEye)};
         Faces.setEyeColors(eyeColors);
-        int[] hairColors={  ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),
-                            ContextCompat.getColor(this, R.color.lightBrownHair), ContextCompat.getColor(this, R.color.brownHair), ContextCompat.getColor(this, R.color.darkBrownHair),ContextCompat.getColor(this, R.color.lightBrownHair), ContextCompat.getColor(this, R.color.brownHair), ContextCompat.getColor(this, R.color.darkBrownHair),
-                            ContextCompat.getColor(this, R.color.lightBrownHair), ContextCompat.getColor(this, R.color.brownHair), ContextCompat.getColor(this, R.color.darkBrownHair),ContextCompat.getColor(this, R.color.lightBrownHair), ContextCompat.getColor(this, R.color.brownHair), ContextCompat.getColor(this, R.color.darkBrownHair),
-                            ContextCompat.getColor(this, R.color.blondeHair), ContextCompat.getColor(this, R.color.lightBlondeHair), ContextCompat.getColor(this, R.color.dirtyBlondHair),
-                            ContextCompat.getColor(this, R.color.dirtyDirtyBlondeHair),};
+        int[] hairColors={  ContextCompat.getColor(DataHolder.getContext(), R.color.blackHair),ContextCompat.getColor(DataHolder.getContext(), R.color.blackHair),ContextCompat.getColor(DataHolder.getContext(), R.color.blackHair),ContextCompat.getColor(DataHolder.getContext(), R.color.blackHair),ContextCompat.getColor(DataHolder.getContext(), R.color.blackHair),ContextCompat.getColor(DataHolder.getContext(), R.color.blackHair),
+                ContextCompat.getColor(DataHolder.getContext(), R.color.lightBrownHair), ContextCompat.getColor(DataHolder.getContext(), R.color.brownHair), ContextCompat.getColor(DataHolder.getContext(), R.color.darkBrownHair),ContextCompat.getColor(DataHolder.getContext(), R.color.lightBrownHair), ContextCompat.getColor(DataHolder.getContext(), R.color.brownHair), ContextCompat.getColor(DataHolder.getContext(), R.color.darkBrownHair),
+                ContextCompat.getColor(DataHolder.getContext(), R.color.lightBrownHair), ContextCompat.getColor(DataHolder.getContext(), R.color.brownHair), ContextCompat.getColor(DataHolder.getContext(), R.color.darkBrownHair),ContextCompat.getColor(DataHolder.getContext(), R.color.lightBrownHair), ContextCompat.getColor(DataHolder.getContext(), R.color.brownHair), ContextCompat.getColor(DataHolder.getContext(), R.color.darkBrownHair),
+                ContextCompat.getColor(DataHolder.getContext(), R.color.blondeHair), ContextCompat.getColor(DataHolder.getContext(), R.color.lightBlondeHair), ContextCompat.getColor(DataHolder.getContext(), R.color.dirtyBlondHair),
+                ContextCompat.getColor(DataHolder.getContext(), R.color.dirtyDirtyBlondeHair),};
         Faces.setHairColors(hairColors);
         String result="";
         try {
-            InputStream i = getResources().openRawResource(R.raw.male_first);
+            InputStream i = DataHolder.getContext().getResources().openRawResource(R.raw.male_first);
             byte[] bytes = new byte[i.available()];
             i.read(bytes);
             result=new String(bytes);
@@ -54,7 +56,7 @@ public class App extends Application
             br.close();
         }catch (Exception e){}
         try {
-            InputStream i = getResources().openRawResource(R.raw.last_names);
+            InputStream i = DataHolder.getContext().getResources().openRawResource(R.raw.last_names);
             byte[] bytes = new byte[i.available()];
             i.read(bytes);
             result=new String(bytes);
@@ -70,7 +72,7 @@ public class App extends Application
             br.close();
         }catch (Exception e){}
         try {
-            InputStream i = getResources().openRawResource(R.raw.nba_names);
+            InputStream i = DataHolder.getContext().getResources().openRawResource(R.raw.nba_names);
             byte[] bytes = new byte[i.available()];
             i.read(bytes);
             result=new String(bytes);

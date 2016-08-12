@@ -14,15 +14,18 @@ public class LoadingScreen extends AppCompatActivity {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    App.setupApp();
                     League league=new League("NBA", DataHolder.getDatabaseHelper().exists());
                     DataHolder.setLeague(league);
                     startActivity(new Intent(DataHolder.getContext(), LeagueViewActivity.class));
+                    finish();
                 }
             });
             thread.start();
         }
         else{
             startActivity(new Intent(DataHolder.getContext(), LeagueViewActivity.class));
+            finish();
         }
     }
 }

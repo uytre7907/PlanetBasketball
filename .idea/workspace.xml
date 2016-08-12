@@ -22,18 +22,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d489a0a-8371-458d-b62f-02aa0b5697dd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LoadingScreen.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_loading_screen.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/App.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/AttributeList.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/AttributeList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/Faces.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/Faces.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LeagueViewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LeagueViewActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/Player.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/PlayerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/PlayerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/raw/nba_names.txt" afterPath="$PROJECT_DIR$/app/src/main/res/raw/nba_names.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LoadingScreen.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LoadingScreen.java" />
     </list>
     <ignored path="Planet Basketball.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,11 +111,11 @@
       <file leaf-file-name="LoadingScreen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LoadingScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78097343">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state vertical-scroll-proportion="1.0221239">
+              <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
               <folding>
-                <element signature="e#458#810#0" expanded="true" />
-                <element signature="e#809#810#0" expanded="true" />
+                <element signature="e#458#876#0" expanded="true" />
+                <element signature="e#875#876#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -146,7 +137,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/App.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="338" selection-start-line="33" selection-start-column="338" selection-end-line="33" selection-end-column="338" />
+              <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -1884,7 +1875,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/DBHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/raw/nba_names.txt" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/App.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/Faces.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/Player.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/AttributeList.java" />
@@ -1892,6 +1882,7 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_loading_screen.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LeagueViewActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/App.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LoadingScreen.java" />
       </list>
     </option>
@@ -2390,7 +2381,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7574335" sideWeight="0.5028653" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6118936" sideWeight="0.49713466" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6118936" sideWeight="0.49713466" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985613" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942098" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -2930,14 +2921,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="338" selection-start-line="33" selection-start-column="338" selection-end-line="33" selection-end-column="338" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/DBHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2948,13 +2931,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sportguys/planetbasketball/LoadingScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78097343">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state vertical-scroll-proportion="1.0221239">
+          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
           <folding>
-            <element signature="e#458#810#0" expanded="true" />
-            <element signature="e#809#810#0" expanded="true" />
+            <element signature="e#458#876#0" expanded="true" />
+            <element signature="e#875#876#0" expanded="true" />
           </folding>
         </state>
       </provider>
