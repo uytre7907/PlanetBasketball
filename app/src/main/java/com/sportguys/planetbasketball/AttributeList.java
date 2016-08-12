@@ -190,49 +190,5 @@ public class AttributeList implements Serializable{
     public static String[] getAttributeNames(){
         return attributeNames;
     }
-    /*
-    public double getPotential() {
-        return potential;
-    }
 
-    public double getSpeed() {
-        return speed;
-    }
-
-    public double getShooting() {
-        return shooting;
-    }
-
-    public double getPassing() {
-        return passing;
-    }
-
-    public double getDribbling() {
-        return dribbling;
-    }
-
-    public double getDefending() {
-        return defending;
-    }
-
-    public double getHeading() {
-        return heading;
-    }
-
-    public double getAwareness() {
-        return awareness;
-    }
-
-    public double getInstinct() {
-        return instinct;
-    }
-
-    public double getStrength() {
-        return strength;
-    }
-
-    public double getSkillMoves() {
-        return skillMoves;
-    }
-*/
 }

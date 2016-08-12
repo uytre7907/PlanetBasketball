@@ -3,23 +3,27 @@
     package="com.sportguys.planetbasketball">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TeamViewActivity"
-            android:parentActivityName=".LeagueViewActivity">
-        </activity>
+        <activity
+            android:name=".TeamViewActivity"
+            android:parentActivityName=".LeagueViewActivity"></activity>
         <activity
             android:name=".PlayerDetailActivity"
             android:parentActivityName=".TeamViewActivity" />
-        <activity android:name=".LeagueViewActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".LeagueViewActivity">
+        </activity>
+        <activity android:name=".LoadingScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

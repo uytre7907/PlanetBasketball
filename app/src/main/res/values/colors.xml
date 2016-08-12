@@ -16,4 +16,12 @@
     <color name="brownEye">#563212</color>
     <color name="greenEye">#6bbaa0</color>
     <color name="hazelEye">#b8ba77</color>
+    <color name="lightBrownHair">#7f4a00</color>
+    <color name="brownHair">#683d00</color>
+    <color name="darkBrownHair">#452900</color>
+    <color name="lightBlondeHair">#d0c600</color>
+    <color name="blondeHair">#9e9100</color>
+    <color name="dirtyBlondHair">#a0940a</color>
+    <color name="blackHair">#000000</color>
+    <color name="dirtyDirtyBlondeHair">#7f6500</color>
 </resources>

@@ -46,7 +46,7 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
         v.nameText.setText(p.getName());
         String tempPos = p.getHeightString()+ " " + p.getPositionString();
         v.positionText.setText(tempPos);
-        String tempOVR=p.getOverallString() + "\n" + (int)p.getAttributes().getAttributeForKey("potential").getValue() + " POT";
+        String tempOVR=p.getOverallString() + "\n" + Math.round(p.getAttributes().getAttributeForKey("potential").getValue()) + " POT";
         v.overallText.setText(tempOVR);
         v.faceView.setImageDrawable(p.getFaceDrawble());
         v.ageText.setText(p.getAgeString());

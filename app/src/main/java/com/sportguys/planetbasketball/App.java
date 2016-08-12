@@ -2,6 +2,7 @@ package com.sportguys.planetbasketball;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
 import java.io.BufferedReader;
@@ -28,6 +29,12 @@ public class App extends Application
         Faces.setFaceColors(skinColors);
         int[] eyeColors = {ContextCompat.getColor(this, R.color.blueEye), ContextCompat.getColor(this, R.color.brownEye), ContextCompat.getColor(this, R.color.greenEye),ContextCompat.getColor(this, R.color.hazelEye)};
         Faces.setEyeColors(eyeColors);
+        int[] hairColors={  ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),ContextCompat.getColor(this, R.color.blackHair),
+                            ContextCompat.getColor(this, R.color.lightBrownHair), ContextCompat.getColor(this, R.color.brownHair), ContextCompat.getColor(this, R.color.darkBrownHair),ContextCompat.getColor(this, R.color.lightBrownHair), ContextCompat.getColor(this, R.color.brownHair), ContextCompat.getColor(this, R.color.darkBrownHair),
+                            ContextCompat.getColor(this, R.color.lightBrownHair), ContextCompat.getColor(this, R.color.brownHair), ContextCompat.getColor(this, R.color.darkBrownHair),ContextCompat.getColor(this, R.color.lightBrownHair), ContextCompat.getColor(this, R.color.brownHair), ContextCompat.getColor(this, R.color.darkBrownHair),
+                            ContextCompat.getColor(this, R.color.blondeHair), ContextCompat.getColor(this, R.color.lightBlondeHair), ContextCompat.getColor(this, R.color.dirtyBlondHair),
+                            ContextCompat.getColor(this, R.color.dirtyDirtyBlondeHair),};
+        Faces.setHairColors(hairColors);
         String result="";
         try {
             InputStream i = getResources().openRawResource(R.raw.male_first);

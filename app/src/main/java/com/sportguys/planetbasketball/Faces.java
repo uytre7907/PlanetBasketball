@@ -25,13 +25,20 @@ import java.io.ByteArrayOutputStream;
 public class Faces {
     private static int[] faceColors;
     private static int[] eyeColors;
+    private static int[] hairColors;
+    private static int[] weirdHairColors = {Color.MAGENTA, Color.BLUE, Color.GREEN, Color.DKGRAY, Color.RED, Color.CYAN};
     public static byte[] makeFace(int height, int width){
 
         int mult = PlayerAttribute.randInt(10,10);
         ShapeDrawable hair = new ShapeDrawable(new OvalShape());
         hair.setIntrinsicWidth(width*PlayerAttribute.randInt(5,8)/10);
         hair.setIntrinsicHeight(width*PlayerAttribute.randInt(10,16)/20);
-        hair.getPaint().setColor(Color.BLACK);
+        if(PlayerAttribute.randInt(1, 150)==1){
+            hair.getPaint().setColor(weirdHairColors[PlayerAttribute.randInt(0,weirdHairColors.length-1)]);
+        }
+        else{
+            hair.getPaint().setColor(hairColors[PlayerAttribute.randInt(0, hairColors.length-1)]);
+        }
         int hairTemp=PlayerAttribute.randInt(1,1);
         int hairEdges=0;
         switch (hairTemp){
@@ -90,6 +97,17 @@ public class Faces {
         mouth.setIntrinsicWidth(width*7/2/mult);
         mouth.getPaint().setColor(Color.WHITE);
 
+        ShapeDrawable eyebrow = new ShapeDrawable(new RectShape());
+        double eyebrowHeight = height*10.0/PlayerAttribute.randInt(100,200);
+        double eyebrowWidth = width*10.0/PlayerAttribute.randInt(50, 100);
+        eyebrow.setIntrinsicHeight((int)eyebrowHeight);
+        eyebrow.setIntrinsicWidth((int)eyebrowWidth);
+        eyebrow.getPaint().setColor(hair.getPaint().getColor());
+        ShapeDrawable eyebrow2 = new ShapeDrawable(new RectShape());
+        eyebrow2.setIntrinsicHeight((int)eyebrowHeight);
+        eyebrow2.setIntrinsicWidth((int)eyebrowWidth);
+        eyebrow2.getPaint().setColor(hair.getPaint().getColor());
+
         ShapeDrawable tongue=null;
         boolean hasTongue=false;
         int tongueIndex=-1;
@@ -117,42 +135,44 @@ public class Faces {
         }
         Drawable[] layers;
         if(hasMustache&&hasTongue){
-            Drawable[] temp = {hair, head, eyeBase, eyeColor, eyePupil, eye2Base, eye2Color, eye2Pupil, mouth, tongue, mustache};
+            Drawable[] temp = {hair, head, eyeBase, eyeColor, eyePupil, eyebrow, eye2Base, eye2Color, eye2Pupil, eyebrow2, mouth, tongue, mustache};
             tongueIndex=temp.length-2;
             mustacheIndex=temp.length-1;
             layers=temp;
         }
         else if(hasMustache){
 
-            Drawable[] temp={hair, head, eyeBase, eyeColor, eyePupil, eye2Base, eye2Color, eye2Pupil, mouth, mustache};
+            Drawable[] temp={hair, head, eyeBase, eyeColor, eyePupil, eyebrow,  eye2Base, eye2Color, eye2Pupil, eyebrow2, mouth, mustache};
             mustacheIndex=temp.length-1;
             layers=temp;
         }
         else if(hasTongue){
-            Drawable[] temp={hair, head, eyeBase, eyeColor, eyePupil, eye2Base, eye2Color, eye2Pupil, mouth, tongue};
+            Drawable[] temp={hair, head, eyeBase, eyeColor, eyePupil, eyebrow, eye2Base, eye2Color, eye2Pupil, eyebrow2, mouth, tongue};
             tongueIndex=temp.length-1;
             layers=temp;
         }
         else{
-            Drawable[] temp={hair, head, eyeBase, eyeColor, eyePupil, eye2Base, eye2Color, eye2Pupil, mouth};
+            Drawable[] temp={hair, head, eyeBase, eyeColor, eyePupil, eyebrow, eye2Base, eye2Color, eye2Pupil, eyebrow2, mouth};
             layers=temp;
         }
-
         LayerDrawable l = new LayerDrawable(layers);
         l.setLayerInset(0, hairEdges, 0, hairEdges, width/(mult/5));
         l.setLayerInset(1, 0, width/mult, 0, 0);
         l.setLayerInset(2,width*2/mult,width*10/3/mult, width*8/mult, width*15/2/mult);
         l.setLayerInset(3,width*2/mult+width/(mult*4),width*10/3/mult+width/(mult*4), width*8/mult+width/(mult*4), width*15/2/mult+width/(mult*4));
         l.setLayerInset(4,width*2/mult+width/(mult*2),width*10/3/mult+width/(mult*2), width*8/mult+width/(mult*2), width*15/2/mult+width/(mult*2));
-        l.setLayerInset(5,width*8/mult,width*10/3/mult, width*2/mult, width*15/2/mult);
-        l.setLayerInset(6,width*8/mult+width/(mult*4),width*10/3/mult+width/(mult*4), width*2/mult+width/(mult*4), width*15/2/mult+width/(mult*4));
-        l.setLayerInset(7,width*8/mult+width/(mult*2),width*10/3/mult+width/(mult*2), width*2/mult+width/(mult*2), width*15/2/mult+width/(mult*2));
-        l.setLayerInset(8, width*6/(2*mult), width*7/mult, width*6/(2*mult), width*3/mult);
+        l.setLayerInset(5, (int)((width-eyebrowWidth)/5), (int)(width*10/3/mult-eyebrowHeight), (int)((width-eyebrowWidth)*7/8), (int) (height*15/2/mult+2.5*eyebrowHeight));
+        l.setLayerInset(6,width*8/mult,width*10/3/mult, width*2/mult, width*15/2/mult);
+        l.setLayerInset(7,width*8/mult+width/(mult*4),width*10/3/mult+width/(mult*4), width*2/mult+width/(mult*4), width*15/2/mult+width/(mult*4));
+        l.setLayerInset(8,width*8/mult+width/(mult*2),width*10/3/mult+width/(mult*2), width*2/mult+width/(mult*2), width*15/2/mult+width/(mult*2));
+        l.setLayerInset(9, (int)((width-eyebrowWidth)*7/8), (int)(width*10/3/mult-eyebrowHeight), (int)((width-eyebrowWidth)/5), (int) (height*15/2/mult+2.5*eyebrowHeight));
+        l.setLayerInset(10, width*6/(2*mult), width*7/mult, width*6/(2*mult), width*3/mult);
         if(hasTongue)
             l.setLayerInset(tongueIndex, (int)(width*6/2/mult+width*tongueMult/mult), width*7/mult,(int)(width*6/2/mult+width*tongueMult/mult), width*3/mult);
-        if(hasMustache)
-            l.setLayerInset(mustacheIndex, width/(mult), width*7/mult - width/10, width/(mult), width-width*7/mult);
-
+        if(hasMustache) {
+            double mustacheMult = PlayerAttribute.randInt(1000, 3500)/1000.0;
+            l.setLayerInset(mustacheIndex, (int) (width * mustacheMult / (mult)), width * 7 / mult - width / 10, (int) (width * mustacheMult / (mult)), width - width * 7 / mult);
+        }
         return bitmapToByteArray(drawableToBitmap(l));
     }
     public static void setEyeColors(int[] colors){
@@ -160,6 +180,9 @@ public class Faces {
     }
     public static void setFaceColors(int[] colors) {
         faceColors=colors;
+    }
+    public static void setHairColors(int[] hairColors) {
+        Faces.hairColors = hairColors;
     }
     public static Drawable bitmapToDrawable(Bitmap bitmap){
         return new BitmapDrawable(DataHolder.getContext().getResources(), bitmap);

@@ -14,13 +14,10 @@ public class LeagueViewActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_league_view);
-        if(DataHolder.getLeague()==null){
-            league=new League("NBA", DataHolder.getDatabaseHelper().exists());
-            DataHolder.setLeague(league);
-        }
-        else{
-            league=DataHolder.getLeague();
-        }
+
+
+        league=DataHolder.getLeague();
+
         setTitle(league.getName());
     }
     public League getLeague(){

@@ -31,6 +31,7 @@ public class Player implements Comparable<Player>, Serializable
     private static LinkedHashMap<Position, Double> averageHeights = AttributeList.getAverageHeights();
     private static LinkedHashMap<Position, Double> devHeights = AttributeList.getDevHeights();
     private Position position;
+    private String fsdiuhf;
     private int positionInt;
     private AttributeList attributeList;
     private double age;
