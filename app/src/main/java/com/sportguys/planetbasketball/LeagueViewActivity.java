@@ -15,7 +15,7 @@ public class LeagueViewActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_league_view);
         if(DataHolder.getLeague()==null){
-            league=new League("NBA");
+            league=new League("NBA", DataHolder.getDatabaseHelper().exists());
             DataHolder.setLeague(league);
         }
         else{

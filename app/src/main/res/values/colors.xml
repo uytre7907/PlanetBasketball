@@ -4,9 +4,16 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="minBlack">#823a00</color>
+    <color name="medBlack">#692f01</color>
     <color name="maxBlack">#3d1b00</color>
-    <color name="minWhite">#fffbf8</color>
+    <color name="minWhite">#ffe3ce</color>
+    <color name="medWhite">#ffcca3</color>
     <color name="maxWhite">#ffc18f</color>
-    <color name="minAsian">#fff1b7</color>
-    <color name="maxAsian">#ffea5f</color>
+    <color name="minAsian">#ffe98b</color>
+    <color name="medAsian">#ffde54</color>
+    <color name="maxAsian">#ffe11a</color>
+    <color name="blueEye">#0077ff</color>
+    <color name="brownEye">#563212</color>
+    <color name="greenEye">#6bbaa0</color>
+    <color name="hazelEye">#b8ba77</color>
 </resources>

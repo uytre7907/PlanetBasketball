@@ -10,6 +10,15 @@ public class DataHolder
     private static League league;
     private static Team team;
     private static Player player;
+    private static DBHelper databaseHelper;
+
+    public static DBHelper getDatabaseHelper() {
+        return databaseHelper;
+    }
+
+    public static void setDatabaseHelper(DBHelper databaseHelper) {
+        DataHolder.databaseHelper = databaseHelper;
+    }
 
     public static Player getPlayer() {
         return player;

@@ -18,7 +18,7 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
         TextView nameText;
         TextView positionText;
         TextView overallText;
-        TextView heighText;
+        TextView ageText;
         ImageView faceView;
     }
     public PlayerAdapter(Context context, ArrayList<Player> players){
@@ -37,17 +37,19 @@ public class PlayerAdapter extends ArrayAdapter<Player> {
             v.positionText = (TextView)(convertView.findViewById(R.id.position_text));
             v.overallText = (TextView)(convertView.findViewById(R.id.overall_text));
             v.faceView = (ImageView)(convertView.findViewById(R.id.list_face));
-            v.heighText = (TextView)(convertView.findViewById(R.id.height_text));
+            v.ageText = (TextView)(convertView.findViewById(R.id.age_text));
             convertView.setTag(v);
         }else{
             v=(ViewHolder)convertView.getTag();
         }
 
         v.nameText.setText(p.getName());
-        v.positionText.setText(p.getPositionString());
-        v.overallText.setText(p.getOverallString());
-        v.faceView.setImageDrawable(p.getFace());
-        v.heighText.setText(p.getHeightString());
+        String tempPos = p.getHeightString()+ " " + p.getPositionString();
+        v.positionText.setText(tempPos);
+        String tempOVR=p.getOverallString() + "\n" + (int)p.getAttributes().getAttributeForKey("potential").getValue() + " POT";
+        v.overallText.setText(tempOVR);
+        v.faceView.setImageDrawable(p.getFaceDrawble());
+        v.ageText.setText(p.getAgeString());
         return convertView;
     }
 }

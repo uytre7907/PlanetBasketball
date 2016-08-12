@@ -1,6 +1,7 @@
 package com.sportguys.planetbasketball;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.content.ContextCompat;
 
 import java.io.BufferedReader;
@@ -21,9 +22,12 @@ public class App extends Application
     public void onCreate() {
         super.onCreate();
         DataHolder.setContext(getApplicationContext());
-        int[] colors={ContextCompat.getColor(this, R.color.minBlack),ContextCompat.getColor(this, R.color.maxBlack),ContextCompat.getColor(this, R.color.minAsian),
-                ContextCompat.getColor(this, R.color.maxAsian), ContextCompat.getColor(this, R.color.minWhite), ContextCompat.getColor(this, R.color.maxWhite)};
-        Faces.setFaceColors(colors);
+        DataHolder.setDatabaseHelper(new DBHelper());
+        int[] skinColors={ContextCompat.getColor(this, R.color.minBlack),ContextCompat.getColor(this, R.color.medBlack),ContextCompat.getColor(this, R.color.maxBlack),ContextCompat.getColor(this, R.color.minAsian),
+                ContextCompat.getColor(this, R.color.medAsian),ContextCompat.getColor(this, R.color.maxAsian), ContextCompat.getColor(this, R.color.minWhite),ContextCompat.getColor(this, R.color.medWhite), ContextCompat.getColor(this, R.color.maxWhite)};
+        Faces.setFaceColors(skinColors);
+        int[] eyeColors = {ContextCompat.getColor(this, R.color.blueEye), ContextCompat.getColor(this, R.color.brownEye), ContextCompat.getColor(this, R.color.greenEye),ContextCompat.getColor(this, R.color.hazelEye)};
+        Faces.setEyeColors(eyeColors);
         String result="";
         try {
             InputStream i = getResources().openRawResource(R.raw.male_first);

@@ -31,7 +31,7 @@ public class PlayerDetailFragment extends Fragment {
         p=DataHolder.getPlayer();
         getActivity().setTitle(p.getName());
         attr.setText(p.toString());
-        faceView.setImageDrawable(p.getFace());
+        faceView.setImageDrawable(p.getFaceDrawble());
         return fragmentLayout;
     }
 }

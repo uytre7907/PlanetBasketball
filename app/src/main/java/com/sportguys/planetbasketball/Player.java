@@ -2,6 +2,7 @@ package com.sportguys.planetbasketball;
 
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
 import android.util.TypedValue;
@@ -24,15 +25,20 @@ enum Position
 }
 
 
-public class Player implements Comparable<Player>
+public class Player implements Comparable<Player>, Serializable
 {
+
+    private static LinkedHashMap<Position, Double> averageHeights = AttributeList.getAverageHeights();
+    private static LinkedHashMap<Position, Double> devHeights = AttributeList.getDevHeights();
     private Position position;
     private int positionInt;
     private AttributeList attributeList;
     private double age;
     private String name;
-    private LayerDrawable face;
+    private byte[] face;
     private double height;
+    private Team team;
+    private String teamName;
     //IN INCHES
     private static ArrayList<String> firstNames=App.getFirstNames();
     private static ArrayList<String> lastNames=App.getLastNames();
@@ -115,8 +121,15 @@ public class Player implements Comparable<Player>
         centerBoosts.put("strength", 45.0);
         centerBoosts.put("stamina", 20.0);
     }
-    public Player()
+    public Player(){
+
+    }
+
+    public Player(Team team)
     {
+        this.team=team;
+        teamName=team.getName();
+
         int dim = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, DataHolder.getContext().getResources().getDisplayMetrics());
         face=Faces.makeFace(dim, dim);
         age=PlayerAttribute.randNorm(20, 2);
@@ -127,35 +140,30 @@ public class Player implements Comparable<Player>
         switch (temp){
             case (0): {
                 position = Position.PointGuard;
-                height=PlayerAttribute.randNorm(74,1.5);
                 positionInt=1;
                 boosts=pointBoosts;
                 break;
             }
             case (1):{
                 position=Position.ShootingGuard;
-                height=PlayerAttribute.randNorm(77,1.5);
                 positionInt=2;
                 boosts=shootingBoosts;
                 break;
             }
             case (2):{
                 position=Position.SmallForward;
-                height=PlayerAttribute.randNorm(79.5,1.5);
                 positionInt=3;
                 boosts=smallBoosts;
                 break;
             }
             case (3):{
                 position=Position.PowerForward;
-                height=PlayerAttribute.randNorm(82,1);
                 positionInt=4;
                 boosts=powerBoosts;
                 break;
             }
             case (4):{
                 position=Position.Center;
-                height=PlayerAttribute.randNorm(83.5,.75);
                 positionInt=5;
                 boosts=centerBoosts;
                 break;
@@ -166,8 +174,9 @@ public class Player implements Comparable<Player>
                 break;
             }
         }
-
-        attributeList = new AttributeList(position, (int) PlayerAttribute.randNorm(50, 15), age, boosts);
+        height = PlayerAttribute.randNorm(averageHeights.get(position), devHeights.get(position));
+        DataHolder.setPlayer(this);
+        attributeList = new AttributeList(position, (int) PlayerAttribute.randNorm(50, 15), age, height, boosts);
     }
 
     @Override
@@ -190,7 +199,7 @@ public class Player implements Comparable<Player>
             return ret;
         }
     }
-    public void save(ObjectOutputStream objectOutputStream)
+    public void writeObject(ObjectOutputStream objectOutputStream)
     {
         try {
             objectOutputStream.writeObject(this);
@@ -203,8 +212,8 @@ public class Player implements Comparable<Player>
     {
         return name;
     }
-    public LayerDrawable getFace(){
-        return face;
+    public Drawable getFaceDrawble(){
+        return Faces.bitmapToDrawable(Faces.byteArrayToBitmap(face));
     }
     public String getPositionString(){
         switch (positionInt){
@@ -232,59 +241,7 @@ public class Player implements Comparable<Player>
         return position;
     }
     public int getOverall(){
-        switch (position){
-            case PointGuard:{
-                return (int)(   .06*attributeList.getAttributeForKey("speed").getValue()+.05*attributeList.getAttributeForKey("layup").getValue()+
-                                .05*attributeList.getAttributeForKey("close").getValue()+.07*attributeList.getAttributeForKey("midrange").getValue()+
-                                .07*attributeList.getAttributeForKey("threes").getValue()+.2*attributeList.getAttributeForKey("passing").getValue()+
-                                .2*attributeList.getAttributeForKey("dribbling").getValue()+.07*attributeList.getAttributeForKey("defending").getValue()+
-                                .07*attributeList.getAttributeForKey("steal").getValue()+.02*attributeList.getAttributeForKey("block").getValue()+
-                                .02*attributeList.getAttributeForKey("rebounding").getValue()+.06*attributeList.getAttributeForKey("awareness").getValue()+
-                                .02*attributeList.getAttributeForKey("strength").getValue()+.02*attributeList.getAttributeForKey("vertical").getValue()+
-                                .02*attributeList.getAttributeForKey("stamina").getValue());
-            }
-            case ShootingGuard:{
-                return (int)(   .1*attributeList.getAttributeForKey("speed").getValue()+.1*attributeList.getAttributeForKey("layup").getValue()+
-                        .1*attributeList.getAttributeForKey("close").getValue()+.12*attributeList.getAttributeForKey("midrange").getValue()+
-                        .15*attributeList.getAttributeForKey("threes").getValue()+.05*attributeList.getAttributeForKey("passing").getValue()+
-                        .05*attributeList.getAttributeForKey("dribbling").getValue()+.07*attributeList.getAttributeForKey("defending").getValue()+
-                        .05*attributeList.getAttributeForKey("steal").getValue()+.02*attributeList.getAttributeForKey("block").getValue()+
-                        .04*attributeList.getAttributeForKey("rebounding").getValue()+.04*attributeList.getAttributeForKey("awareness").getValue()+
-                        .03*attributeList.getAttributeForKey("strength").getValue()+.06*attributeList.getAttributeForKey("vertical").getValue()+
-                        .02*attributeList.getAttributeForKey("stamina").getValue());
-            }
-            case SmallForward:{
-                return (int)(   .07*attributeList.getAttributeForKey("speed").getValue()+.07*attributeList.getAttributeForKey("layup").getValue()+
-                        .07*attributeList.getAttributeForKey("close").getValue()+.07*attributeList.getAttributeForKey("midrange").getValue()+
-                        .07*attributeList.getAttributeForKey("threes").getValue()+.07*attributeList.getAttributeForKey("passing").getValue()+
-                        .07*attributeList.getAttributeForKey("dribbling").getValue()+.07*attributeList.getAttributeForKey("defending").getValue()+
-                        .07*attributeList.getAttributeForKey("steal").getValue()+.07*attributeList.getAttributeForKey("block").getValue()+
-                        .07*attributeList.getAttributeForKey("rebounding").getValue()+.07*attributeList.getAttributeForKey("awareness").getValue()+
-                        .07*attributeList.getAttributeForKey("strength").getValue()+.07*attributeList.getAttributeForKey("vertical").getValue()+
-                        .07*attributeList.getAttributeForKey("stamina").getValue());
-            }
-            case PowerForward:{
-                return (int)(   .05*attributeList.getAttributeForKey("speed").getValue()+.14*attributeList.getAttributeForKey("layup").getValue()+
-                        .12*attributeList.getAttributeForKey("close").getValue()+.09*attributeList.getAttributeForKey("midrange").getValue()+
-                        .03*attributeList.getAttributeForKey("threes").getValue()+.05*attributeList.getAttributeForKey("passing").getValue()+
-                        .02*attributeList.getAttributeForKey("dribbling").getValue()+.07*attributeList.getAttributeForKey("defending").getValue()+
-                        .08*attributeList.getAttributeForKey("steal").getValue()+.1*attributeList.getAttributeForKey("block").getValue()+
-                        .1*attributeList.getAttributeForKey("rebounding").getValue()+.03*attributeList.getAttributeForKey("awareness").getValue()+
-                        .07*attributeList.getAttributeForKey("strength").getValue()+.03*attributeList.getAttributeForKey("vertical").getValue()+
-                        .02*attributeList.getAttributeForKey("stamina").getValue());
-            }
-            case Center:{
-                return (int)(   .04*attributeList.getAttributeForKey("speed").getValue()+.18*attributeList.getAttributeForKey("layup").getValue()+
-                        .08*attributeList.getAttributeForKey("close").getValue()+.04*attributeList.getAttributeForKey("midrange").getValue()+
-                        .02*attributeList.getAttributeForKey("threes").getValue()+.04*attributeList.getAttributeForKey("passing").getValue()+
-                        .02*attributeList.getAttributeForKey("dribbling").getValue()+.1*attributeList.getAttributeForKey("defending").getValue()+
-                        .04*attributeList.getAttributeForKey("steal").getValue()+.15*attributeList.getAttributeForKey("block").getValue()+
-                        .15*attributeList.getAttributeForKey("rebounding").getValue()+.02*attributeList.getAttributeForKey("awareness").getValue()+
-                        .08*attributeList.getAttributeForKey("strength").getValue()+.02*attributeList.getAttributeForKey("vertical").getValue()+
-                        .02*attributeList.getAttributeForKey("stamina").getValue());
-            }
-        }
-        return 60;
+        return attributeList.getOverall(position);
     }
     public String getOverallString(){
         return getOverall()+" OVR";
@@ -293,4 +250,86 @@ public class Player implements Comparable<Player>
         int currHeight=(int)height;
         return currHeight/12+"' " + currHeight%12 + '"';
     }
+
+    public Team getTeam() {
+        return team;
+    }
+    public int getAgeInt(){
+        return (int)age;
+    }
+    public double getAge() { return age; }
+    public double getHeight() { return height; }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public void setPositionInt(int positionInt) {
+        this.positionInt = positionInt;
+        switch (positionInt){
+            case 1:{
+                position=Position.PointGuard;
+                break;
+            }
+            case 2:{
+                position=Position.ShootingGuard;
+                break;
+            }
+            case 3:{
+                position=Position.SmallForward;
+                break;
+            }
+            case 4:{
+                position=Position.PowerForward;
+                break;
+            }
+            case 5:{
+                position=Position.Center;
+                break;
+            }
+            default:{
+                position=Position.SmallForward;
+                break;
+            }
+
+        }
+    }
+
+    public void setAttributeList(AttributeList attributeList) {
+        this.attributeList = attributeList;
+    }
+
+    public void setAge(double age) {
+        this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFace(byte[] face) {
+        this.face = face;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public byte[] getFace() { return face; }
+    public String getAgeString(){
+        return getAgeInt() + " years old";
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
 }
