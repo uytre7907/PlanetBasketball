@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class DBHelper extends SQLiteOpenHelper{
     public final static String DB_NAME = "players";
+    public final static String PLAYER_ID = "id";
     public final static String PLAYER_NAME = "name";
     public final static String PLAYER_TEAM_NAME = "team_name";
-    public final static String PLAYER_ATTRIBUTES = "attributes";
     public final static String PLAYER_AGE = "age";
     public final static String PLAYER_HEIGHT = "height";
     public final static String PLAYER_POSITION_INT = "position_int";
@@ -31,6 +31,7 @@ public class DBHelper extends SQLiteOpenHelper{
     }
     private static final String DICTIONARY_TABLE_CREATE =
             "CREATE TABLE " + DB_NAME + " (" +
+                    PLAYER_ID + " TEXT, " +
                     PLAYER_NAME + " TEXT, " +
                     PLAYER_TEAM_NAME + " TEXT, " +
                     PLAYER_AGE + " TEXT, " +
@@ -54,6 +55,7 @@ public class DBHelper extends SQLiteOpenHelper{
     public void addPlayer(Player p){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(PLAYER_ID, p.getId()+"");
         values.put(PLAYER_NAME, p.getName());
         values.put(PLAYER_TEAM_NAME, p.getTeamName());
         values.put(PLAYER_AGE, p.getAge()+"");
@@ -75,9 +77,10 @@ public class DBHelper extends SQLiteOpenHelper{
 
         if(cursor.moveToFirst()){
             do{
-                if(cursor.getString(1).equals(team.getName())) {
+                if(cursor.getString(2).equals(team.getName())) {
                     Player p = new Player();
                     int count=0;
+                    p.setId(Integer.parseInt(cursor.getString(count++)));
                     p.setName(cursor.getString(count++));
                     p.setTeam(team);
                     p.setTeamName(team.getName());
@@ -100,7 +103,23 @@ public class DBHelper extends SQLiteOpenHelper{
         return playerList;
 
     }
-
+    public int updatePlayer(Player p) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(PLAYER_ID, p.getId()+"");
+        values.put(PLAYER_NAME, p.getName());
+        values.put(PLAYER_TEAM_NAME, p.getTeamName());
+        values.put(PLAYER_AGE, p.getAge()+"");
+        values.put(PLAYER_HEIGHT, p.getHeight()+"");
+        values.put(PLAYER_POSITION_INT, p.getPositionInt()+"");
+        for(String s:attributeNames){
+            values.put(s, p.getAttributes().getAttributeForKey(s).getValue()+"");
+        }
+        values.put(PLAYER_FACE, p.getFace());
+// updating row
+        return db.update(DB_NAME, values, PLAYER_ID + " = ?",
+                new String[]{String.valueOf(p.getId()+"")});
+    }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 

@@ -26,4 +26,9 @@ public class PlayerDetailActivity extends AppCompatActivity {
 
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

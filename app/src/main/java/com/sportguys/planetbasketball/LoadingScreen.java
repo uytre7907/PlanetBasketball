@@ -14,7 +14,7 @@ public class LoadingScreen extends AppCompatActivity {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    App.setupApp();
+                    ((App)(getApplication())).setupApp();
                     League league=new League("NBA", DataHolder.getDatabaseHelper().exists());
                     DataHolder.setLeague(league);
                     startActivity(new Intent(DataHolder.getContext(), LeagueViewActivity.class));

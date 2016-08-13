@@ -31,4 +31,9 @@ public class TeamViewActivity extends AppCompatActivity {
     public Team getTeam(){
         return team;
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

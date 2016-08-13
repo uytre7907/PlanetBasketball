@@ -31,7 +31,6 @@ public class Player implements Comparable<Player>, Serializable
     private static LinkedHashMap<Position, Double> averageHeights = AttributeList.getAverageHeights();
     private static LinkedHashMap<Position, Double> devHeights = AttributeList.getDevHeights();
     private Position position;
-    private String fsdiuhf;
     private int positionInt;
     private AttributeList attributeList;
     private double age;
@@ -39,6 +38,7 @@ public class Player implements Comparable<Player>, Serializable
     private byte[] face;
     private double height;
     private Team team;
+    private int id;
     private String teamName;
     //IN INCHES
     private static ArrayList<String> firstNames=App.getFirstNames();
@@ -128,6 +128,8 @@ public class Player implements Comparable<Player>, Serializable
 
     public Player(Team team)
     {
+        id = App.getCurrId();
+        App.setCurrId(App.getCurrId()+1);
         this.team=team;
         teamName=team.getName();
 
@@ -182,7 +184,7 @@ public class Player implements Comparable<Player>, Serializable
 
     @Override
     public String toString() {
-        return getPositionString()+ "\nAge: " + (int)age + "\nHeight: " + getHeightString()+"\nOverall: " +getOverall() + "\n" + attributeList.toString();
+        return "Age: " + (int)age + "\nHeight: " + getHeightString()+"\nOverall: " +getOverall() + "\n" + attributeList.toString();
     }
     public AttributeList getAttributes(){
         return attributeList;
@@ -199,15 +201,6 @@ public class Player implements Comparable<Player>, Serializable
         else{
             return ret;
         }
-    }
-    public void writeObject(ObjectOutputStream objectOutputStream)
-    {
-        try {
-            objectOutputStream.writeObject(this);
-        }
-        catch (IOException e)
-        {}
-
     }
     public String getName()
     {
@@ -267,6 +260,7 @@ public class Player implements Comparable<Player>, Serializable
 
     public void setPositionInt(int positionInt) {
         this.positionInt = positionInt;
+
         switch (positionInt){
             case 1:{
                 position=Position.PointGuard;
@@ -295,7 +289,9 @@ public class Player implements Comparable<Player>, Serializable
 
         }
     }
-
+    public void recalculateSize(){
+        attributeList.genSize(attributeList.getAttributeForKey("size"), height);
+    }
     public void setAttributeList(AttributeList attributeList) {
         this.attributeList = attributeList;
     }
@@ -331,6 +327,16 @@ public class Player implements Comparable<Player>, Serializable
 
     public String getTeamName() {
         return teamName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+        if(id>App.getCurrId())
+            App.setCurrId(id+1);
     }
 
 }

@@ -41,6 +41,7 @@ public class AttributeList implements Serializable{
     public AttributeList(List<PlayerAttribute> playerAttributes, Position position)
     {
         this.playerAttributes=playerAttributes;
+        this.position=position;
     }
     public AttributeList(Position position, int prestige, double age, double height, LinkedHashMap<String, Double> boosts) {
         //could use some refining
@@ -56,6 +57,13 @@ public class AttributeList implements Serializable{
         getAttributeForKey("potential").setValue(genPotential());
 
     }
+    public void setPosition(Position p){
+        this.position = p;
+    }
+    public void genSize(PlayerAttribute p, double height){
+        double z=(height-averageHeights.get(position))/devHeights.get(position);
+        p.generateStatWithValue(100*PlayerAttribute.normCDF(z));
+    }
     private void generateStats(double multiplier, Position position, double height){
         for(PlayerAttribute p: playerAttributes)
         {
@@ -63,20 +71,24 @@ public class AttributeList implements Serializable{
                 if(!p.getName().equals("size"))
                     p.generateStat(multiplier);
                 else {
-                    double z=(height-averageHeights.get(position))/devHeights.get(position);
-                    p.generateStatWithValue(100*PlayerAttribute.normCDF(z));
+                    genSize(p, height);
                 }
             }
         }
     }
     private double genPotential(){
         int overall=getOverall(position);
-        double potential = PlayerAttribute.randNorm((99-overall)/4+overall, (99-overall)/5);
-        if(potential>99)
-            potential=99;
-        else if(potential<overall)
-            potential=overall;
-
+        double potential=0.0;
+        if(PlayerAttribute.randInt(0, 2)==0) {
+            potential = PlayerAttribute.randNorm(Math.round((99 - overall) / 4.0 + overall), Math.round((99 - overall) / 5.0) + 3);
+        }
+        else{
+            potential = PlayerAttribute.randNorm(Math.round((99-overall)/6.0 + overall), Math.round((99-overall)/6.0));
+        }
+        if (potential > 99)
+            potential = 99;
+        else if (potential < overall)
+            potential = overall;
         return potential;
     }
 
@@ -115,10 +127,10 @@ public class AttributeList implements Serializable{
     @Override
     public String toString() {
         String out = "";
-        for(PlayerAttribute p: playerAttributes)
-        {
-            out+=p.toString() + "\n";
+        for(int i=0; i<playerAttributes.size()-1; i++){
+            out+=playerAttributes.get(i).toString() + "\n";
         }
+        out+=playerAttributes.get(playerAttributes.size()-1).toString();
         return out;
     }
     public PlayerAttribute getAttributeForKey(String key)
@@ -133,9 +145,10 @@ public class AttributeList implements Serializable{
         return null;
     }
     public int getOverall(Position position){
+        int ret=0;
         switch (position){
             case PointGuard:{
-                return (int)(   .06*getAttributeForKey("speed").getValue()+.05*getAttributeForKey("layup").getValue()+
+                ret = (int)(   .06*getAttributeForKey("speed").getValue()+.05*getAttributeForKey("layup").getValue()+
                         .05*getAttributeForKey("close").getValue()+.07*getAttributeForKey("midrange").getValue()+
                         .07*getAttributeForKey("threes").getValue()+.19*getAttributeForKey("passing").getValue()+
                         .19*getAttributeForKey("dribbling").getValue()+.07*getAttributeForKey("defending").getValue()+
@@ -143,9 +156,10 @@ public class AttributeList implements Serializable{
                         .02*getAttributeForKey("rebounding").getValue()+.06*getAttributeForKey("awareness").getValue()+
                         .02*getAttributeForKey("strength").getValue()+.02*getAttributeForKey("vertical").getValue()+
                         .02*getAttributeForKey("stamina").getValue() + .02*getAttributeForKey("size").getValue());
+                break;
             }
             case ShootingGuard:{
-                return (int)(   .08*getAttributeForKey("speed").getValue()+.09*getAttributeForKey("layup").getValue()+
+                ret = (int)(   .08*getAttributeForKey("speed").getValue()+.09*getAttributeForKey("layup").getValue()+
                         .1*getAttributeForKey("close").getValue()+.11*getAttributeForKey("midrange").getValue()+
                         .15*getAttributeForKey("threes").getValue()+.05*getAttributeForKey("passing").getValue()+
                         .05*getAttributeForKey("dribbling").getValue()+.07*getAttributeForKey("defending").getValue()+
@@ -153,9 +167,10 @@ public class AttributeList implements Serializable{
                         .04*getAttributeForKey("rebounding").getValue()+.04*getAttributeForKey("awareness").getValue()+
                         .03*getAttributeForKey("strength").getValue()+.06*getAttributeForKey("vertical").getValue()+
                         .02*getAttributeForKey("stamina").getValue()+ .04*getAttributeForKey("size").getValue());
+                break;
             }
             case SmallForward:{
-                return (int)(   .06*getAttributeForKey("speed").getValue()+.07*getAttributeForKey("layup").getValue()+
+                ret = (int)(   .06*getAttributeForKey("speed").getValue()+.07*getAttributeForKey("layup").getValue()+
                         .06*getAttributeForKey("close").getValue()+.06*getAttributeForKey("midrange").getValue()+
                         .06*getAttributeForKey("threes").getValue()+.06*getAttributeForKey("passing").getValue()+
                         .06*getAttributeForKey("dribbling").getValue()+.07*getAttributeForKey("defending").getValue()+
@@ -163,9 +178,10 @@ public class AttributeList implements Serializable{
                         .07*getAttributeForKey("rebounding").getValue()+.06*getAttributeForKey("awareness").getValue()+
                         .06*getAttributeForKey("strength").getValue()+.06*getAttributeForKey("vertical").getValue()+
                         .06*getAttributeForKey("stamina").getValue()+ .07*getAttributeForKey("size").getValue());
+                break;
             }
             case PowerForward:{
-                return (int)(   .05*getAttributeForKey("speed").getValue()+.12*getAttributeForKey("layup").getValue()+
+                ret = (int)(   .05*getAttributeForKey("speed").getValue()+.12*getAttributeForKey("layup").getValue()+
                         .1*getAttributeForKey("close").getValue()+.06*getAttributeForKey("midrange").getValue()+
                         .02*getAttributeForKey("threes").getValue()+.05*getAttributeForKey("passing").getValue()+
                         .02*getAttributeForKey("dribbling").getValue()+.07*getAttributeForKey("defending").getValue()+
@@ -173,9 +189,10 @@ public class AttributeList implements Serializable{
                         .1*getAttributeForKey("rebounding").getValue()+.03*getAttributeForKey("awareness").getValue()+
                         .07*getAttributeForKey("strength").getValue()+.03*getAttributeForKey("vertical").getValue()+
                         .02*getAttributeForKey("stamina").getValue()+ .1*getAttributeForKey("size").getValue());
+                break;
             }
             case Center:{
-                return (int)(   .02*getAttributeForKey("speed").getValue()+.15*getAttributeForKey("layup").getValue()+
+                ret = (int)(   .02*getAttributeForKey("speed").getValue()+.15*getAttributeForKey("layup").getValue()+
                         .05*getAttributeForKey("close").getValue()+.02*getAttributeForKey("midrange").getValue()+
                         .01*getAttributeForKey("threes").getValue()+.02*getAttributeForKey("passing").getValue()+
                         .01*getAttributeForKey("dribbling").getValue()+.1*getAttributeForKey("defending").getValue()+
@@ -183,9 +200,15 @@ public class AttributeList implements Serializable{
                         .15*getAttributeForKey("rebounding").getValue()+.02*getAttributeForKey("awareness").getValue()+
                         .08*getAttributeForKey("strength").getValue()+.02*getAttributeForKey("vertical").getValue()+
                         .02*getAttributeForKey("stamina").getValue()+ .14*getAttributeForKey("size").getValue());
+                break;
             }
         }
-        return 60;
+        PlayerAttribute pot = getAttributeForKey("potential");
+        if(pot.getValue()!=0.0 && pot.getValue()<ret){
+            Log.d("gefe", getAttributeForKey("potential").getValue()+"");
+            getAttributeForKey("potential").setValue(ret);
+        }
+        return ret;
     }
     public static String[] getAttributeNames(){
         return attributeNames;

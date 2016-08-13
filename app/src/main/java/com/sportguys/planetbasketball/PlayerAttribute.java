@@ -29,9 +29,9 @@ public class PlayerAttribute implements Serializable
     public void generateStat(double mean, double stdDev)
     {
         double temp = randNorm(mean, stdDev) + boostOnGeneration;
-        if (temp>99)
+        if (temp>100)
         {
-            value = 99;
+            value = 100;
         }
         else
         {
@@ -40,14 +40,19 @@ public class PlayerAttribute implements Serializable
     }
 
     public void generateStatWithValue(double value){
-        this.value=value;
+        if(value>100){
+            this.value=100;
+        }
+        else{
+            this.value=value;
+        }
     }
     public void generateStat(double multiplier)
     {
         double temp = multiplier*randNorm(25, 5) + boostOnGeneration;
-        if (temp>99)
+        if (temp>100)
         {
-            value = 99;
+            value = 100;
         }
         else
         {

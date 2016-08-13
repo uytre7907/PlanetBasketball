@@ -23,4 +23,5 @@ public class LeagueViewActivity extends AppCompatActivity {
     public League getLeague(){
         return league;
     }
+
 }
