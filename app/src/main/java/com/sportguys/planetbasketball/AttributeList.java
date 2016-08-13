@@ -205,7 +205,6 @@ public class AttributeList implements Serializable{
         }
         PlayerAttribute pot = getAttributeForKey("potential");
         if(pot.getValue()!=0.0 && pot.getValue()<ret){
-            Log.d("gefe", getAttributeForKey("potential").getValue()+"");
             getAttributeForKey("potential").setValue(ret);
         }
         return ret;
